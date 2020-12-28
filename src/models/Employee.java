@@ -14,32 +14,30 @@ import javax.persistence.Table;
 @Table(name = "employees")
 @NamedQueries({
     @NamedQuery(
-            name = "getAllEmployees",
-            query = "SELECT e FROM Employee AS e ORDER BY e.id DESC"
-            ),
+        name = "getAllEmployees",
+        query = "SELECT e FROM Employee AS e ORDER BY e.id DESC"
+    ),
     @NamedQuery(
-            name = "getEmployeesCount",
-            query = "SELECT COUNT(e) FROM Employee AS e"
-            ),
+        name = "getEmployeesCount",
+        query = "SELECT COUNT(e) FROM Employee AS e"
+    ),
     @NamedQuery(
-            name = "checkRegisteredCode",
-            query = "SELECT COUNT(e) FROM Employee AS e WHERE e.code = :code"
-            ),
+        name = "checkRegisteredCode",
+        query = "SELECT COUNT(e) FROM Employee AS e WHERE e.code = :code"
+    ),
     @NamedQuery(
-            name = "checkLoginCodeAndPassword",
-            query = "SELECT e FROM Employee AS e WHERE e.delete_flag = 0 AND e.code = :code AND e.password = :pass"
-            )
+        name = "checkLoginCodeAndPassword",
+        query = "SELECT e FROM Employee AS e WHERE e.delete_flag = 0 AND e.code = :code AND e.password = :pass"
+    )
 })
-
 @Entity
-
 public class Employee {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "code", nullable= false, unique = true)
+    @Column(name = "code", nullable = false, unique = true)
     private String code;
 
     @Column(name = "name", nullable = false)
@@ -55,7 +53,7 @@ public class Employee {
     private Timestamp created_at;
 
     @Column(name = "updated_at", nullable = false)
-    private Timestamp updeated_at;
+    private Timestamp updated_at;
 
     @Column(name = "delete_flag", nullable = false)
     private Integer delete_flag;
@@ -108,12 +106,12 @@ public class Employee {
         this.created_at = created_at;
     }
 
-    public Timestamp getUpdeated_at() {
-        return updeated_at;
+    public Timestamp getUpdated_at() {
+        return updated_at;
     }
 
-    public void setUpdeated_at(Timestamp updeated_at) {
-        this.updeated_at = updeated_at;
+    public void setUpdated_at(Timestamp updated_at) {
+        this.updated_at = updated_at;
     }
 
     public Integer getDelete_flag() {
@@ -123,11 +121,10 @@ public class Employee {
     public void setDelete_flag(Integer delete_flag) {
         this.delete_flag = delete_flag;
     }
-
-
-
-
-
-
-
 }
+
+
+
+
+
+

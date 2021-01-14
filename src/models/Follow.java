@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -33,11 +32,12 @@ public class Follow {
     private Integer id;
 
     @ManyToOne
-    @JoinColumns({
-        @JoinColumn(name = "user_id",nullable = false),
-        @JoinColumn(name = "follow_id", nullable = false),
-    })
-    private Employee employee;
+    @JoinColumn(name = "user_id",nullable = false)
+    private Employee user;
+
+    @ManyToOne
+    @JoinColumn(name = "follow_id", nullable = false)
+    private Employee follow;
 
     public Integer getId() {
         return id;
@@ -47,13 +47,22 @@ public class Follow {
         this.id = id;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public Employee getUser() {
+        return user;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setUser(Employee user) {
+        this.user = user;
     }
+
+    public Employee getFollow() {
+        return follow;
+    }
+
+    public void setFollow(Employee follow) {
+        this.follow = follow;
+    }
+
 
 
 }

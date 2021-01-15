@@ -12,7 +12,7 @@ body{
 }
 
 #content{
-    width: 100%;
+    width: 94%;
     margin-top: 15px;
     padding-left: 3%;
 }
@@ -145,16 +145,20 @@ table#report_list .report_name{
     padding: 10px 2%;
 }
 
-table#report_list .report_title {
+table#report_list .report_date {
     width: 20%;
 }
 
 table#report_list .report_title{
-    width: 37%;
+    width: 30%;
+}
+
+table#report_list .report_favorite{
+    width:8%;
 }
 
 table#report_list .report_action{
-    width: 13%;
+    width: 12%;
 }
 
 pre{
@@ -165,4 +169,15 @@ h3{
     font-size: larger;
 }
 
+table#follow_list .follow_name{
+    width: 20%;
+    padding: 10px 2%;
+}
 
+table#follow_list .follow_currentReport{
+    width:55%;
+}
+
+table#follow_list .follow_action{
+    width: 15%;
+}

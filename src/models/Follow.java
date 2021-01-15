@@ -33,11 +33,11 @@ public class Follow {
 
     @ManyToOne
     @JoinColumn(name = "user_id",nullable = false)
-    private Employee user;
+    private Employee user_id;
 
     @ManyToOne
     @JoinColumn(name = "follow_id", nullable = false)
-    private Employee follow;
+    private Employee follow_id;
 
     public Integer getId() {
         return id;
@@ -48,19 +48,19 @@ public class Follow {
     }
 
     public Employee getUser() {
-        return user;
+        return user_id;
     }
 
-    public void setUser(Employee user) {
-        this.user = user;
+    public void setUser(Employee user_id) {
+        this.user_id = user_id;
     }
 
     public Employee getFollow() {
-        return follow;
+        return follow_id;
     }
 
-    public void setFollow(Employee follow) {
-        this.follow = follow;
+    public void setFollow(Employee follow_id) {
+        this.follow_id = follow_id;
     }
 
 

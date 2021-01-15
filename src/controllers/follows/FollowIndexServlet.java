@@ -1,4 +1,4 @@
-package controllers.reports;
+package controllers.follows;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,20 +11,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Report;
+import models.Follow;
 import utils.DBUtil;
 
 /**
- * Servlet implementation class ReportsIndexServlet
+ * Servlet implementation class FollowIndexServlet
  */
-@WebServlet("/reports/index")
-public class ReportsIndexServlet extends HttpServlet {
+@WebServlet({ "/follows/index" })
+public class FollowIndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReportsIndexServlet() {
+    public FollowIndexServlet() {
         super();
     }
 
@@ -40,27 +40,22 @@ public class ReportsIndexServlet extends HttpServlet {
         }catch(Exception e){
             page = 1;
         }
-        List<Report> reports = em.createNamedQuery("getAllReports", Report.class)
-                                 .setFirstResult(15 * (page - 1))
-                                 .setMaxResults(15)
-                                 .getResultList();
+        List<Follow> follows = em.createNamedQuery("getAllFollows", Follow.class)
+                                  .setFirstResult(15 * (page - 1))
+                                  .setMaxResults(15)
+                                  .getResultList();
 
-        long reports_count = (long)em.createNamedQuery("getReportsCount", Long.class)
-                                      .getSingleResult();
-
+        long follows_count = (long)em.createNamedQuery("getFollowsCount", Long.class )
+                                       .getSingleResult();
         em.close();
 
-        request.setAttribute("reports", reports);
-        request.setAttribute("reports_count", reports_count);
+        request.setAttribute("follows", follows);
+        request.setAttribute("follows_count", follows_count);
         request.setAttribute("page", page);
-        if(request.getSession().getAttribute("flush") != null){
-            request.setAttribute("flush", request.getSession().getAttribute("flush"));
-            request.getSession().removeAttribute("flush");
-        }
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reports/index.jsp");
+
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/follows/index.jsp");
         rd.forward(request, response);
     }
 
 }
-

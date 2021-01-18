@@ -21,7 +21,7 @@
                 </tr>
                 <c:forEach var="report" items="${reports}" varStatus="satatus">
                     <tr class="row${status.count % 2}">
-                        <td class="report_name"><c:out value="${report.employee.name}"/></td>
+                        <td class="report_name"><a href="<c:url value='/follows/show?employee_id=${report.employee.id}'/>"><c:out value="${report.employee.name}"/></a></td>
                         <td class="report_date"><fmt:formatDate value='${report.report_date}' pattern='yyyy-MM-dd'/></td>
                         <td class="report_title">${report.title}</td>
                         <td class="report_favorite"><button type="button" name="fav" value='${favorites_count }'><i class="far fa-heart"></i></button></td>

@@ -47,21 +47,23 @@ public class Follow {
         this.id = id;
     }
 
-    public Employee getUser() {
+    public Employee getUser_id() {
         return user_id;
     }
 
-    public void setUser(Employee user_id) {
+    public void setUser_id(Employee user_id) {
         this.user_id = user_id;
     }
 
-    public Employee getFollow() {
+    public Employee getFollow_id() {
         return follow_id;
     }
 
-    public void setFollow(Employee follow_id) {
+    public void setFollow_id(Employee follow_id) {
         this.follow_id = follow_id;
     }
+
+
 
 
 

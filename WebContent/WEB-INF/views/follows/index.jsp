@@ -12,7 +12,7 @@
                 </tr>
                 <c:forEach var="follow" items="${follows}" varStatus="status">
                     <tr class="row${status.count % 2 }">
-                        <td class="follow_name"><c:out value="${follow.follow_id}"/></td>
+                        <td class="follow_name"><c:out value="${follow.follow_id.name}"/></td>
                         <td class="follow_currentReport"><a href="<c:url value='/reports/show?id=${report.id}'/>"><c:out value="最新の記事"></c:out>a></a></td>
                         <td class="follow_action"><button type="button" name="follow" >フォローする</button></td>
                     </tr>

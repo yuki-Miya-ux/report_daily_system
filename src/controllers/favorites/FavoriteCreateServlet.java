@@ -1,4 +1,4 @@
-package controllers.follows;
+package controllers.favorites;
 
 import java.io.IOException;
 
@@ -10,20 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Employee;
-import models.Follow;
+import models.Favorite;
+import models.Report;
 import utils.DBUtil;
 
 /**
- * Servlet implementation class FollowCreateServlet
+ * Servlet implementation class FavoriteCreateServlet
  */
-@WebServlet("/follows/create")
-public class FollowCreateServlet extends HttpServlet {
+@WebServlet("/favorites/create")
+public class FavoriteCreateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FollowCreateServlet() {
+    public FavoriteCreateServlet() {
         super();
     }
 
@@ -34,20 +35,21 @@ public class FollowCreateServlet extends HttpServlet {
         String _token = (String)request.getParameter("_token");
         if(_token != null && _token.equals(request.getSession().getId())){
             EntityManager em = DBUtil.createEntityManager();
-            Employee e = em.find(Employee.class, Integer.parseInt(request.getParameter("follow_id")));
 
-            Follow f = new Follow();
+            Report r = em.find(Report.class, Integer.parseInt(request.getParameter("report_id")));
 
-            f.setFollow_id(e);
-            f.setUser_id((Employee)request.getSession().getAttribute("login_employee"));
+            Favorite fav = new Favorite();
 
+
+            fav.setEmployee((Employee)request.getSession().getAttribute("login_employee"));
+            fav.setReport(r);
 
             em.getTransaction().begin();
-            em.persist(f);
+            em.persist(fav);
             em.getTransaction().commit();
             em.close();
 
-            response.sendRedirect(request.getContextPath() + "/follows/index");
+            response.sendRedirect(request.getContextPath() + "/report/index");
         }
     }
 

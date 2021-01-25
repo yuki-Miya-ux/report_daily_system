@@ -38,13 +38,12 @@ public class ReportsShowServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
         Report r = em.find(Report.class, Integer.parseInt(request.getParameter("id")));
         Employee login_employee = (Employee)request.getSession().getAttribute("login_employee");
+        Employee employee = r.getEmployee();
 
         try{
-            Employee follow_id = r.getEmployee();
-
             Follow f = (Follow)em.createNamedQuery("getFollow_id", Follow.class)
                                                         .setParameter("user_id", login_employee)
-                                                        .setParameter("follow_id", follow_id)
+                                                        .setParameter("follow_id", employee)
                                                         .getSingleResult();
             request.setAttribute("follow", f);
 
@@ -68,6 +67,7 @@ public class ReportsShowServlet extends HttpServlet {
         em.close();
 
         request.setAttribute("report", r);
+        request.setAttribute("employee", employee);
         request.setAttribute("_token", request.getSession().getId());
 
 

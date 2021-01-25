@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Employee;
+import models.Follow;
 import models.Report;
 import utils.DBUtil;
 
@@ -35,6 +37,7 @@ public class FollowShowServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
+
         Employee employee = em.find(Employee.class, Integer.parseInt(request.getParameter("employee_id")));
 
         int page;
@@ -43,6 +46,7 @@ public class FollowShowServlet extends HttpServlet {
         }catch(Exception e){
             page = 1;
         }
+
         List<Report> reports = em.createNamedQuery("getMyAllReports", Report.class)
                                  .setParameter("employee", employee)
                                  .setFirstResult(15 * (page - 1))
@@ -53,12 +57,37 @@ public class FollowShowServlet extends HttpServlet {
                                        .setParameter("employee", employee)
                                        .getSingleResult();
 
+        Employee login_employee = (Employee)request.getSession().getAttribute("login_employee");
+
+        long follows_count = (long)em.createNamedQuery("getFollowsCount", Long.class )
+                                        .setParameter("employee", login_employee)
+                                        .getSingleResult();
+
+        long follower_count = (long)em.createNamedQuery("getFollowsCount", Long.class )
+                                        .setParameter("employee", login_employee)
+                                        .getSingleResult();
+
+        try{
+            Follow f = (Follow)em.createNamedQuery("getFollow_id", Follow.class)
+                                                        .setParameter("user_id", login_employee)
+                                                        .setParameter("follow_id", employee)
+                                                        .getSingleResult();
+            request.setAttribute("follow", f);
+
+        }catch(NoResultException e){
+
+        }
+
+
         em.close();
 
         request.setAttribute("employee", employee);
         request.setAttribute("reports", reports);
         request.setAttribute("reports_count", reports_count);
+        request.setAttribute("follows_count", follows_count);
+        request.setAttribute("follower_count", follower_count);
         request.setAttribute("page", page);
+        request.setAttribute("_token", request.getSession().getId());
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/follows/show.jsp");
         rd.forward(request, response);

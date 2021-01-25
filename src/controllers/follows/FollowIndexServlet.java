@@ -55,10 +55,19 @@ public class FollowIndexServlet extends HttpServlet {
                                         .getResultList();
 
 */
+       /* try{
+            List<Follow> f = em.createNamedQuery("getFollow_id", Follow.class)
+                                                        .setParameter("user_id", login_employee)
+                                                        .setParameter("follow_id", follows)
+                                                        .getResultList();
+            request.setAttribute("follow", f);
 
+        }catch(NoResultException e){}
+*/
         long follows_count = (long)em.createNamedQuery("getFollowsCount", Long.class )
                                        .setParameter("employee", login_employee)
                                        .getSingleResult();
+
         em.close();
 
         request.setAttribute("follows", follows);

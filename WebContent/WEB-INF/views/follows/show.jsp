@@ -4,9 +4,12 @@
 <c:import url="../layout/app.jsp">
     <c:param name="content">
     <h2><c:out value="${employee.name }"></c:out>の日報一覧</h2>
+    <p>フォロー ${follows_count } </p>
+    <p>フォロワー ${follower_count }</p>
+    <c:import url="../follows/_follow.jsp" />
     <table id="follow_list">
         <tbody>
-            <tr class="follow_report_date">
+            <tr class="follow_report">
                 <th class="follow_report_date">日付</th>
                 <th class="follow_report_title">タイトル</th>
                 <th class="follow_report_fav"></th>

@@ -49,7 +49,7 @@ public class FavoriteCreateServlet extends HttpServlet {
             em.getTransaction().commit();
             em.close();
 
-            response.sendRedirect(request.getContextPath() + "/report/index");
+            response.sendRedirect(request.getContextPath() + "/reports/index");
         }
     }
 

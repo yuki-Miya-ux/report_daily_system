@@ -7,7 +7,7 @@
         <c:choose>
             <c:when test="${report != null}">
                 <h2>日報　詳細ページ</h2>
-                <button type="button" name="fav" value='${favorites_count }'><i class="far fa-heart"></i></button>
+                <c:import url="/WEB-INF/views/favorites/_favorite.jsp" />
                 <c:import url="/WEB-INF/views/follows/_follow.jsp" />
 
                 <table>

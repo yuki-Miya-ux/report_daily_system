@@ -49,12 +49,20 @@ public class FollowIndexServlet extends HttpServlet {
                                   .setMaxResults(15)
                                   .getResultList();
 
+       /* List<Report> follows_report = em.createNamedQuery("getFollowerCurrentReport", Report.class)
+                                        .setParameter("follow_id", follows)
+                                        .setMaxResults(1)
+                                        .getResultList();
+
+*/
+
         long follows_count = (long)em.createNamedQuery("getFollowsCount", Long.class )
                                        .setParameter("employee", login_employee)
                                        .getSingleResult();
         em.close();
 
         request.setAttribute("follows", follows);
+  //      request.setAttribute("follows_report", follows_report);
         request.setAttribute("follows_count", follows_count);
         request.setAttribute("page", page);
 

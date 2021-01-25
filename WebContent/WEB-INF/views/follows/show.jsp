@@ -3,14 +3,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="../layout/app.jsp">
     <c:param name="content">
-    <h2><c:out value="${report.employee.name }"></c:out>の日報一覧</h2>
+    <h2><c:out value="${employee.name }"></c:out>の日報一覧</h2>
     <table id="follow_list">
         <tbody>
             <tr class="follow_report_date">
-                <th class="follow_report_date"></th>
-                <th class="follow_report_title"></th>
+                <th class="follow_report_date">日付</th>
+                <th class="follow_report_title">タイトル</th>
                 <th class="follow_report_fav"></th>
-                <th class="follow_report_action"></th>
+                <th class="follow_report_action">操作</th>
             </tr>
             <c:forEach var="report" items="${reports}" varStatus="status">
                 <tr class="row${status.count % 2 }">

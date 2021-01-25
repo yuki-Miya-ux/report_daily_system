@@ -55,6 +55,7 @@ public class FollowShowServlet extends HttpServlet {
 
         em.close();
 
+        request.setAttribute("employee", employee);
         request.setAttribute("reports", reports);
         request.setAttribute("reports_count", reports_count);
         request.setAttribute("page", page);

@@ -15,7 +15,7 @@ import utils.DBUtil;
 /**
  * Servlet implementation class FavoriteDestroyServlet
  */
-@WebServlet("/favorite/destroy")
+@WebServlet("/favorites/destroy")
 public class FavoriteDestroyServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -41,7 +41,7 @@ public class FavoriteDestroyServlet extends HttpServlet {
             em.getTransaction().commit();
             em.close();
 
-            response.sendRedirect(request.getContextPath() + "/report/index");
+            response.sendRedirect(request.getContextPath() + "/reports/index");
         }
     }
 

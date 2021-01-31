@@ -19,12 +19,12 @@
                     <th class="report_favorite"></th>
                     <th class="report_action">操作</th>
                 </tr>
-                <c:forEach var="report" items="${reports}" varStatus="satatus">
+                <c:forEach var="report" items="${reports}" varStatus="status">
                     <tr class="row${status.count % 2}">
                         <td class="report_name"><a href="<c:url value='/follows/show?employee_id=${report.employee.id}'/>"><c:out value="${report.employee.name}"/></a></td>
                         <td class="report_date"><fmt:formatDate value='${report.report_date}' pattern='yyyy-MM-dd'/></td>
                         <td class="report_title">${report.title}</td>
-                        <td class="report_favorite"><button type="button" name="fav" value='${favorites_count }'><i class="far fa-heart"></i></button></td>
+                        <td class="report_favorite"> ${favorites_count} <c:import url="/WEB-INF/views/favorites/_favorite.jsp"></c:import></td>
                         <td class="report_action"><a href="<c:url value='/reports/show?id=${report.id}'/>">詳細を見る</a></td>
                     </tr>
                 </c:forEach>

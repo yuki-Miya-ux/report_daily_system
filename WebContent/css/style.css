@@ -174,10 +174,54 @@ table#follow_list .follow_name{
     padding: 10px 2%;
 }
 
+table#follow_list .follow_report_date{
+    width: 20%;
+}
+
+table#follow_list .follow_report_title{
+    width: 50%;
+}
+
+table#follow_list .follow_report_fav{
+    width: 15%
+}
+
 table#follow_list .follow_currentReport{
     width:55%;
 }
 
 table#follow_list .follow_action{
     width: 15%;
+}
+
+.follow_count{
+    float: left;
+    padding-left: 30px;
+}
+
+.follower_count{
+    float: left;
+    padding-left: 15px;
+    padding-right: 25px;
+}
+
+.favorite_count{
+    float: left;
+    padding-left: 15px;
+    padding-right: 25px;
+}
+
+.fav_button{
+    float: left;
+    padding-left: 30px;
+    padding-top: 6px;
+}
+
+button.follow{
+    padding:25px,20px;
+    border-radius: 15px;
+}
+
+button.fav{
+    border-radius: 15px;
 }

@@ -8,13 +8,11 @@
                 <tr>
                     <th class="follow_name">氏名</th>
                     <th class="follow_currentReport">最新の記事</th>
-                    <th class="follow_action"></th>
                 </tr>
-                <c:forEach var="follow" items="${follows}" varStatus="status">
+                <c:forEach var="currentReport" items="${follows_current_report}" varStatus="status">
                     <tr class="row${status.count % 2 }">
-                        <td class="follow_name"><!--  <a href="<c:url value='/follows/show?employee_id=${report.employee.id}'/>" /> --><c:out value="${follow.follow_id.name}"/></td>
-                        <td class="follow_currentReport"><a href="<c:url value='/reports/show?id=${report.id}'/>"><c:out value="${follows_report }"></c:out></a></td>
-                        <td class="follow_action"><c:import url="/WEB-INF/views/follows/_follow.jsp"></c:import></td>
+                        <td class="follow_name"><a href="<c:url value='/follows/show?employee_id=${currentReport.employee.id }'/>" ><c:out value="${currentReport.employee.name}"/></a></td>
+                        <td class="follow_currentReport"><a href="<c:url value='/reports/show?id=${currentReport.id}'/>" ><c:out value="${currentReport.title }"/></a></td>
                     </tr>
                 </c:forEach>
             </tbody>

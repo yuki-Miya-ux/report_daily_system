@@ -7,14 +7,14 @@
         <form method="POST" action="<c:url value='/favorites/destroy' /> ">
               <input type="hidden" name="report_id" value="${favorite.id}" />
               <input type="hidden" name="_token" value="${_token }" />
-              <button type="submit" name="fav_out"><i class="fas fa-heart"></i></button>
+              <button type="submit" class="fav"><i class="fas fa-heart"></i></button>
         </form>
     </c:when>
     <c:otherwise>
         <form method="POST" action="<c:url value='/favorites/create'/> ">
                 <input type="hidden" name="report_id" value="${report.id}" />
                 <input type="hidden" name="_token" value="${_token}" />
-                <button type="submit" name="fav" ><i class="far fa-heart"></i></button>
+                <button type="submit" class="fav" ><i class="far fa-heart"></i></button>
             </form>
     </c:otherwise>
 </c:choose>

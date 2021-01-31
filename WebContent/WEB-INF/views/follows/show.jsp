@@ -4,9 +4,11 @@
 <c:import url="../layout/app.jsp">
     <c:param name="content">
     <h2><c:out value="${employee.name }"></c:out>の日報一覧</h2>
-    <p>フォロー ${follows_count } </p>
-    <p>フォロワー ${follower_count }</p>
-    <c:import url="../follows/_follow.jsp" />
+    <div class="follow">
+        <p class="follow_count">フォロー ${follows_count } </p>
+        <p class="follower_count">フォロワー ${follower_count }</p>
+        <c:import url="../follows/_follow.jsp" />
+    </div>
     <table id="follow_list">
         <tbody>
             <tr class="follow_report">
@@ -19,8 +21,8 @@
                 <tr class="row${status.count % 2 }">
                     <td class="follow_report_date"><fmt:formatDate value='${report.report_date }' pattern='yyyy-MM-dd' /></td>
                     <td class="follow_report_title">${report.title}</td>
-                    <td class="follow_report_fav"></td>
-                    <td class="follow_report_action"><a href="<c:url value='/reports/show?id=${report.id}'/>">詳細を見る</a></td>
+                    <td class="follow_report_fav"><c:import url="/WEB-INF/views/favorites/_favorite.jsp"></c:import></td>
+                    <td class="follow_action"><a href="<c:url value='/reports/show?id=${report.id}'/>">詳細を見る</a></td>
                 </tr>
             </c:forEach>
         </tbody>
@@ -39,7 +41,9 @@
            </c:forEach>
         </div>
 
+        <p><a href="<c:url value='/follows/index'/>">フォロー一覧に戻る</a></p>
         <p><a href="<c:url value='/reports/index'/>">日報一覧に戻る</a></p>
+
 </c:param>
 
 </c:import>

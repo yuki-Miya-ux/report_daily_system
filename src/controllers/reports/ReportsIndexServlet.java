@@ -48,6 +48,8 @@ public class ReportsIndexServlet extends HttpServlet {
         long reports_count = (long)em.createNamedQuery("getReportsCount", Long.class)
                                       .getSingleResult();
 
+
+
         em.close();
 
         request.setAttribute("reports", reports);

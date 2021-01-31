@@ -60,15 +60,15 @@ public class FollowShowServlet extends HttpServlet {
         Employee login_employee = (Employee)request.getSession().getAttribute("login_employee");
 
         long follows_count = (long)em.createNamedQuery("getFollowsCount", Long.class )
-                                        .setParameter("employee", login_employee)
+                                        .setParameter("employee", employee)
                                         .getSingleResult();
 
-        long follower_count = (long)em.createNamedQuery("getFollowsCount", Long.class )
-                                        .setParameter("employee", login_employee)
+        long follower_count = (long)em.createNamedQuery("getFollowerCount", Long.class )
+                                        .setParameter("employee", employee)
                                         .getSingleResult();
 
         try{
-            Follow f = (Follow)em.createNamedQuery("getFollow_id", Follow.class)
+            Follow f = (Follow)em.createNamedQuery("checkFollow_id", Follow.class)
                                                         .setParameter("user_id", login_employee)
                                                         .setParameter("follow_id", employee)
                                                         .getSingleResult();

@@ -1,6 +1,7 @@
 package controllers.follows;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import models.Employee;
 import models.Follow;
+import models.Report;
 import utils.DBUtil;
 
 /**
@@ -49,29 +51,37 @@ public class FollowIndexServlet extends HttpServlet {
                                   .setMaxResults(15)
                                   .getResultList();
 
-       /* List<Report> follows_report = em.createNamedQuery("getFollowerCurrentReport", Report.class)
-                                        .setParameter("follow_id", follows)
-                                        .setMaxResults(1)
-                                        .getResultList();
+       try{
+           List<Report> currentReports = new ArrayList<Report>();
+           for(Follow f :follows){
 
-*/
-       /* try{
-            List<Follow> f = em.createNamedQuery("getFollow_id", Follow.class)
-                                                        .setParameter("user_id", login_employee)
-                                                        .setParameter("follow_id", follows)
-                                                        .getResultList();
-            request.setAttribute("follow", f);
+               Employee emp = new Employee();
+               emp = f.getFollow_id();
 
-        }catch(NoResultException e){}
-*/
+               Report r = new Report();
+               r = em.createNamedQuery("getCurrentReports", Report.class)
+                               .setParameter("employee", emp)
+                               .setFirstResult(1)
+                               .setMaxResults(1)
+                               .getSingleResult();
+
+               currentReports.add(r);
+           }
+               request.setAttribute("follows_current_report", currentReports);
+       }catch(Exception e){
+
+       }
+
+
+
         long follows_count = (long)em.createNamedQuery("getFollowsCount", Long.class )
                                        .setParameter("employee", login_employee)
                                        .getSingleResult();
 
         em.close();
 
+
         request.setAttribute("follows", follows);
-  //      request.setAttribute("follows_report", follows_report);
         request.setAttribute("follows_count", follows_count);
         request.setAttribute("page", page);
 

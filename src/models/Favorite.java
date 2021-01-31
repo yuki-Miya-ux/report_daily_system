@@ -15,10 +15,10 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(
             name = "getFavoritesCount",
-            query = "SELECT COUNT(fav) FROM Favorite AS fav"
+            query = "SELECT COUNT(fav) FROM Favorite AS fav WHERE fav.report = :report_id"
                 ),
     @NamedQuery(
-            name = "getFavorites",
+            name = "checkFavorites",
             query = "SELECT fav FROM Favorite AS fav WHERE fav.employee = :user_id AND fav.report = :report_id"
             )
 })

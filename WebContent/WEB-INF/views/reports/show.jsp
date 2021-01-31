@@ -7,9 +7,11 @@
         <c:choose>
             <c:when test="${report != null}">
                 <h2>日報　詳細ページ</h2>
-                <c:import url="/WEB-INF/views/favorites/_favorite.jsp" />
-                <c:import url="/WEB-INF/views/follows/_follow.jsp" />
-
+                <div>
+                    <div class="fav_button"><c:import url="/WEB-INF/views/favorites/_favorite.jsp" /></div>
+                    <p class="favorite_count"> ${favorites_count} </p>
+                    <c:import url="/WEB-INF/views/follows/_follow.jsp" />
+                </div>
                 <table>
                     <tbody>
                         <tr>
@@ -43,7 +45,7 @@
                 <h2>お探しのデータは見つかりませんでした。</h2>
             </c:otherwise>
         </c:choose>
-        <p><a href="<c:url value="/follows/index"/>"><c:out value="${report.employee.name}"/>の一覧にもどる</a></p>
+        <p><a href="<c:url value="/follows/show?employee_id=${report.employee.id }"/>"><c:out value="${report.employee.name}"/>の一覧にもどる</a></p>
 
         <p><a href="<c:url value="/reports/index" />">日報一覧に戻る</a></p>
     </c:param>

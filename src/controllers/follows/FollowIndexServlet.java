@@ -55,17 +55,15 @@ public class FollowIndexServlet extends HttpServlet {
            List<Report> currentReports = new ArrayList<Report>();
            for(Follow f :follows){
 
-               Employee emp = new Employee();
-               emp = f.getFollow_id();
+               Employee emp = f.getFollow_id();
 
-               Report r = new Report();
-               r = em.createNamedQuery("getCurrentReports", Report.class)
+               List<Report> r = em.createNamedQuery("getCurrentReports", Report.class)
                                .setParameter("employee", emp)
-                               .setFirstResult(1)
+                               .setFirstResult(0)
                                .setMaxResults(1)
-                               .getSingleResult();
+                               .getResultList();
 
-               currentReports.add(r);
+               currentReports.add(r.get(0));
            }
                request.setAttribute("follows_current_report", currentReports);
        }catch(Exception e){

@@ -35,7 +35,7 @@ import javax.persistence.Table;
             ),
     @NamedQuery(
             name = "getCurrentReports",
-            query = "SELECT r FROM Report AS r WHERE r.employee = :employee"
+            query = "SELECT r FROM Report AS r WHERE r.employee = :employee ORDER BY r.id DESC"
             )
 })
 

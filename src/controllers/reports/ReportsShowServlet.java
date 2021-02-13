@@ -41,7 +41,7 @@ public class ReportsShowServlet extends HttpServlet {
         Employee employee = r.getEmployee();
 
         try{
-            Follow f = (Follow)em.createNamedQuery("checkFollow_id", Follow.class)
+            Follow f = em.createNamedQuery("checkFollow_id", Follow.class)
                                                         .setParameter("user_id", login_employee)
                                                         .setParameter("follow_id", employee)
                                                         .getSingleResult();
@@ -53,11 +53,12 @@ public class ReportsShowServlet extends HttpServlet {
 
 
         try{
-            Favorite fav =(Favorite)em.createNamedQuery("checkFavorites", Favorite.class)
+            Favorite fav = em.createNamedQuery("checkFavorites", Favorite.class)
                                                         .setParameter("user_id", login_employee)
                                                         .setParameter("report_id", r)
                                                         .getSingleResult();
             request.setAttribute("favorite", fav);
+
         }catch(NoResultException e){
 
         }

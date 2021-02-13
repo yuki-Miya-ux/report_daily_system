@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.util.List" %>
+<%@ page import="models.Report" %>
+<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 <c:import url="../layout/app.jsp">
     <c:param name="content">
     <h2><c:out value="${employee.name }"></c:out>の日報一覧</h2>
@@ -17,11 +20,40 @@
                 <th class="follow_report_fav"></th>
                 <th class="follow_report_action">操作</th>
             </tr>
+            <% List<Report> favorite = (List<Report>)request.getAttribute("favorite");  %>
+            <% Report fav_report; %>
             <c:forEach var="report" items="${reports}" varStatus="status">
                 <tr class="row${status.count % 2 }">
                     <td class="follow_report_date"><fmt:formatDate value='${report.report_date }' pattern='yyyy-MM-dd' /></td>
                     <td class="follow_report_title">${report.title}</td>
-                    <td class="follow_report_fav"><c:import url="/WEB-INF/views/favorites/_favorite.jsp"></c:import></td>
+                    <td class="follow_report_fav">
+                        <% fav_report = (Report)pageContext.findAttribute("report"); %>
+                            <% for(Report r : favorite){
+                                  if(r == fav_report){
+                                      request.setAttribute("fav", true);
+                                      break;
+                                  }
+                                  if(r != fav_report){
+                                      request.setAttribute("fav",false);
+                                  }
+                            }%>
+                <c:choose>
+                    <c:when test="${fav == true}">
+                        <form method="POST" action="<c:url value='/favorites/destroy' /> ">
+                              <input type="hidden" name="report_id" value="${report.id}" />
+                              <input type="hidden" name="_token" value="${_token }" />
+                              <button type="submit" class="fav"><i class="fas fa-heart"></i></button>
+                        </form>
+                    </c:when>
+                    <c:otherwise>
+                        <form method="POST" action="<c:url value='/favorites/create'/> ">
+                                <input type="hidden" name="report_id" value="${report.id}" />
+                                <input type="hidden" name="_token" value="${_token}" />
+                                <button type="submit" class="fav" ><i class="far fa-heart"></i></button>
+                            </form>
+                    </c:otherwise>
+                </c:choose>
+                    </td>
                     <td class="follow_action"><a href="<c:url value='/reports/show?id=${report.id}'/>">詳細を見る</a></td>
                 </tr>
             </c:forEach>

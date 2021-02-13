@@ -28,7 +28,7 @@
                         <td class="report_name"><a href="<c:url value='/follows/show?employee_id=${report.employee.id}'/>"><c:out value="${report.employee.name}"/></a></td>
                         <td class="report_date"><fmt:formatDate value='${report.report_date}' pattern='yyyy-MM-dd'/></td>
                         <td class="report_title">${report.title}</td>
-                        <td class="report_favorite"> ${favorites_count}
+                        <td class="report_favorite">
                             <% fav_report = (Report)pageContext.findAttribute("report"); %>
                             <% for(Report r : favorite){
                                   if(r == fav_report){

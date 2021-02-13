@@ -1,6 +1,7 @@
 package controllers.follows;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Employee;
+import models.Favorite;
 import models.Follow;
 import models.Report;
 import utils.DBUtil;
@@ -77,6 +79,22 @@ public class FollowShowServlet extends HttpServlet {
         }catch(NoResultException e){
 
         }
+
+        List<Report> fav_list = new ArrayList<Report>();
+        for(Report r :reports){
+                Report r_id =  r;
+                Report fav_report = new Report();
+            try{
+                Favorite fav = em.createNamedQuery("checkFavorites", Favorite.class)
+                                .setParameter("user_id", login_employee)
+                                .setParameter("report_id", r_id)
+                                .getSingleResult();
+
+                fav_report = fav.getReport();
+                fav_list.add(fav_report);
+            }catch(Exception e){}
+        }
+            request.setAttribute("favorite", fav_list);
 
 
         em.close();

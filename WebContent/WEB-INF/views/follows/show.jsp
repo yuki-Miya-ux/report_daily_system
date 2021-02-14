@@ -53,6 +53,7 @@
                             </form>
                     </c:otherwise>
                 </c:choose>
+                <p class="favorite_count">${fav_map[report]}</p>
                     </td>
                     <td class="follow_action"><a href="<c:url value='/reports/show?id=${report.id}'/>">詳細を見る</a></td>
                 </tr>

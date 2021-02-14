@@ -2,7 +2,9 @@ package controllers.reports;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.servlet.RequestDispatcher;
@@ -68,7 +70,20 @@ public class ReportsIndexServlet extends HttpServlet {
                 fav_list.add(fav_report);
             }catch(Exception e){}
         }
-            request.setAttribute("favorite", fav_list);
+        request.setAttribute("favorite", fav_list);
+
+        Map<Report, Long> fav_map = new HashMap<Report, Long>();
+        for(Report r: reports){
+            Report report = r;
+            try{
+                 long fav_counts = (long)em.createNamedQuery("getFavoritesCount", Long.class)
+                                            .setParameter("report_id", report)
+                                            .getSingleResult();
+                 fav_map.put(report, fav_counts);
+                 request.setAttribute("fav_map", fav_map);
+            }catch(Exception e){}
+        }
+
 
         em.close();
 

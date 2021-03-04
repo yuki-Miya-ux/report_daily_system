@@ -8,7 +8,7 @@
             <c:when test="${report != null}">
                 <h2>日報　詳細ページ</h2>
                 <div>
-                    <div class="fav_button"><c:import url="/WEB-INF/views/favorites/_favorite.jsp" /></div>
+                    <c:import url="/WEB-INF/views/favorites/_favorite.jsp" />
                     <p class="favorite_count"> ${favorites_count} </p>
                     <c:import url="/WEB-INF/views/follows/_follow.jsp" />
                 </div>
